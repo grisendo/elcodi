@@ -123,7 +123,7 @@ class CartManager
 
         if ($carts->count() > 0) {
 
-            $cart = $carts->first();
+            $cart = $carts->last();
             $this->dispatchCartCheckEvents($cart);
             $this->dispatchCartLoadEvents($cart);
 
@@ -347,7 +347,6 @@ class CartManager
     public function addProduct(CartInterface $cart, ProductInterface $product, $quantity = 1)
     {
         foreach ($cart->getCartLines() as $cartLine) {
-
             /**
              * @var CartLineInterface $cartLine
              */
@@ -356,12 +355,10 @@ class CartManager
                 return $this->increaseCartLineQuantity($cartLine, $quantity);
             }
         }
-
         $cartLine = $this->cartLineFactory->create();
         $cartLine
             ->setProduct($product)
             ->setQuantity($quantity);
-
         $this->addLine($cart, $cartLine);
 
         $this->manager->persist($cartLine);

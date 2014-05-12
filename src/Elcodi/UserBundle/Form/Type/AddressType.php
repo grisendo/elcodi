@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Type for a user edit profile form
  */
-class CustomerType extends AbstractType
+class AddressType extends AbstractType
 {
 
     /**
@@ -34,7 +34,7 @@ class CustomerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elcodi\UserBundle\Entity\Customer'
+            'data_class' => 'Elcodi\UserBundle\Entity\Address'
         ));
     }
 
@@ -47,34 +47,9 @@ class CustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email', array(
+            ->add('address', null, array(
                 'required' => true,
-                'label' => '_Email',
-            ))
-            ->add('password', 'password', array(
-                'label' => '_Password',
-                'required' => false,
-                'data' => ''
-            ))
-            ->add('firstname', null, array(
-                'required' => true,
-                'label' => '_Name',
-            ))
-            ->add('lastname', null, array(
-                'required' => true,
-                'label' => '_Surname',
-            ))
-            ->add('identity_document', null, array(
-                'required' => false,
-                'label' => '_IdentityDocument',
-            ))
-            ->add('enabled', 'checkbox', array(
-                'label' => '_Enabled',
-                'required' => false
-            ))
-            ->add('newsletter', 'checkbox', array(
-                'label' => '_Newsletter',
-                'required' => false
+                'label' => '_Address',
             ));
     }
 
@@ -85,6 +60,6 @@ class CustomerType extends AbstractType
      */
     public function getName()
     {
-        return 'elcodi_core_form_types_customer';
+        return 'elcodi_core_form_types_address';
     }
 }
