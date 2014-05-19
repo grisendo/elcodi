@@ -122,8 +122,18 @@ class CartManager
         $cart = null;
 
         if ($carts->count() > 0) {
-
+            /* We assume Cart Collection is ordered
+             * according to insertion order.
+             * A more thorogh solution would be to
+             * inject a CartCollectionStrategyInterface
+             * to the CartManager so that a the
+             * behavior to retrieve "last" Cart for a
+             * user can be customized. (ie. Customer
+             * Entity implementations that have a "orderBy"
+             * directive on the "carts" relation)
+             */
             $cart = $carts->last();
+
             $this->dispatchCartCheckEvents($cart);
             $this->dispatchCartLoadEvents($cart);
 
